@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souls of Elysium Calculators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .calculator-section {
+            width: 48%;
+        }
+
+        .attribute-list, .results {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        select, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Souls of Elysium Calculators</h1>
+
+    <div class="container">
+        <div class="calculator-section">
+            <h2>Souls of Elysium Item Level Calculator</h2>
+            <form>
+                <label for="rarity">Rarity:</label>
+                <select id="rarity">
+                    <option value="common">Common</option>
+                    <option value="rare">Rare</option>
+                    <option value="epic">Epic</option>
+                </select>
+
+                <label for="rarityitemlevel">Current Itemlevel:</label>
+                <input type="text" id="rarityitemlevel">
+
+                <button type="button" onclick="sum1()">Calculate Item Level</button>
+
+                <div class="results">
+                    <p><strong>Results:</strong></p>
+                    <p>Legendary Itemlevel: <input type="text" id="result1" readonly></p>
+                    <p>Accesories Max Itemlevel(+5): <input type="text" id="result2" readonly></p>
+                    <p>Weapons and Armours Max Itemlevel(+10): <input type="text" id="result3" readonly></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="calculator-section">
+            <h2>Souls of Elysium Attribute Calculator</h2>
+
+                <label for="typeSelect">Item Type:</label>
+                <select id="typeSelect">
+                    <option value="" selected>Select item type</option>
+                    <option value="meleeWeapons">Melee Weapons</option>
+                    <option value="distanceWeapons">Distance Weapons</option>
+                    <option value="wands">Wands</option>
+                    <option value="armours">Helmet, Armour, Pants</option>
+                    <option value="boots">Boots</option>
+                    <option value="shields">Shield</option>
+                    <option value="accessories">Ring, Necklace</option>
+                </select>
+
+                <label for="itemlevel">Itemlevel:</label>
+                <input type="text" id="itemlevel">
+
+                <button type="button" onclick="changeType()">Calculate Attributes</button>
+
+                <div class="attribute-list">
+                    <p><strong>Attribute Outcomes:</strong></p>
+                </div>
+
+        </div>
+    </div>
+
+    <script>
+        function sum1() {
+            var rarity = document.getElementById('rarity').value;
+            var rarityItemLevel = document.getElementById('rarityitemlevel').value;
+            var res = document.getElementById('result1');
+            var res2 = document.getElementById('result2');
+            var res3 = document.getElementById('result3');
+
+            if (rarity === "common") {
+                res.value = Math.floor(rarityItemLevel * 4 + 30);
+                res2.value = Math.floor(rarityItemLevel * 4 + 30 + 50);
+                res3.value = Math.floor(rarityItemLevel * 4 + 30 + 100);
+            } else if (rarity === "rare") {
+                res.value = Math.floor(rarityItemLevel * 2 + 15);
+                res2.value = Math.floor(rarityItemLevel * 2 + 15 + 50);
+                res3.value = Math.floor(rarityItemLevel * 2 + 15 + 100);
+            } else if (rarity === "epic") {
+                res.value = Math.floor(rarityItemLevel / 0.75 + 5);
+                res2.value = Math.floor(rarityItemLevel / 0.75 + 5 + 50);
+                res3.value = Math.floor(rarityItemLevel / 0.75 + 5 + 100);
+            }
+        }
+
+        const attributes = {
+            meleeWeapons: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical damage ": {
+					"value": 0.05,
+					"unit": "%",
+				},
+				"Elemental damage ": {
+					"value": 0.03,
+					"unit": "%",
+				},
+				"Chance to deal Double damage": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Damage taken recouped as life": {
+					"value": 0.058,
+					"unit": "%",
+				},
+				"Health on kill": {
+					"value": 0.2,
+					"unit": "",
+				},
+				"One-handed skill": {
+					"value": 0.01,
+					"unit": "",
+				},
+				"Two-handed skill": {
+					"value": 0.01,
+					"unit": "",
+				},
+				"Melee skill": {
+					"value": 0.01,
+					"unit": "",
+				},
+
+            },
+            distanceWeapons: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical damage ": {
+					"value": 0.05,
+					"unit": "%",
+				},
+				"Elemental damage ": {
+						"value": 0.03,
+						"unit": "%",
+				},
+				"Energy damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Fire damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Ice damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Holy damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Chance to deal Double damage": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Damage taken recouped as life": {
+					"value": 0.058,
+					"unit": "%",
+				},
+				"Health on kill": {
+					"value": 0.2,
+					"unit": "",
+				},
+				"Distance": {
+					"value": 0.02,
+					"unit": "",
+				},
+				},
+            wands: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical damage ": {
+					"value": 0.05,
+					"unit": "%",
+				},
+				"Elemental damage ": {
+						"value": 0.03,
+						"unit": "%",
+				},
+				"Energy damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Fire damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Ice damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Earth damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Death damage ": {
+						"value": 0.05,
+						"unit": "%",
+				},
+				"Chance to deal Double damage": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Damage taken recouped as life": {
+					"value": 0.058,
+					"unit": "%",
+				},
+				"Spellcost Reduction %": {
+					"value":0.034,
+					"unit": "%",
+				},
+				"Health on kill": {
+					"value": 0.2,
+					"unit": "",
+				},
+				"Magic Level": {
+					"value": 0.02,
+					"unit": "",
+				},
+            },
+            armours: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Elemental Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Energy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Fire Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Ice Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Earth Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Holy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Death Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+            },
+            boots: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Elemental Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Energy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Fire Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Ice Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Earth Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Holy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Death Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Increased gold Drop ": {
+					"value": 0.03,
+					"unit": "%",
+				},
+            },
+            shields: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Physical Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Elemental Protection ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Energy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Fire Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Ice Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Earth Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Holy Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Death Protection ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Increased gold Drop ": {
+					"value": 0.03,
+					"unit": "%",
+				},
+				"Increased Incomming Healing ": {
+					"value": 0.05,
+					"unit": "%",
+				},
+            },
+            accessories: {
+                "HP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"MP ": {
+					"value": 0.0205,
+					"unit": "%",
+				},
+				"Experience ": {
+					"value": 0.01,
+					"unit": "%",
+				},
+				"Increased gold Drop ": {
+					"value": 0.03,
+					"unit": "%",
+				},
+				"Increased Incomming Healing ": {
+					"value": 0.05,
+					"unit": "%",
+				},
+				"Max HP Buff ": {
+					"value": 0.02,
+					"unit": "%",
+				},
+				"Magic Level": {
+					"value": 0.02,
+					"unit": "",
+				},
+				"Distance": {
+					"value": 0.02,
+					"unit": "",
+				},
+				"One-handed skill": {
+					"value": 0.01,
+					"unit": "",
+				},
+				"Two-handed skill": {
+					"value": 0.01,
+					"unit": "",
+				},
+
+				
+            },
+}
+        function changeType() {
+            const type = document.getElementById("typeSelect").value;
+            const itemLevel = parseFloat(document.getElementById("itemlevel").value);
+            const attrList = document.querySelector(".attribute-list");
+
+            if (type && itemLevel) {
+                attrList.innerHTML = "<p><strong>Attribute Outcomes:</strong></p>";
+                const typeAttrs = attributes[type];
+
+                for (const attr in typeAttrs) {
+                    const attrValue = Math.ceil(typeAttrs[attr].value * itemLevel);  // Rounding up the value
+					var attrValueType = typeAttrs[attr].unit 
+                    attrList.innerHTML += `<p>${attr}: ${attrValue}${attrValueType}</p>`;
+                }
+            } else {
+                alert("Please select an item type and enter the item level.");
+            }
+        }
+    </script>
+
+</body>
+</html>
