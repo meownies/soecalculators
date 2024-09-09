@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0042)https://meownies.github.io/soecalculators/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Souls of Elysium Calculators</title>
     <style>
@@ -35,6 +35,51 @@
             margin: 10px 0;
         }
     </style>
+	    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .calculator-section {
+            width: 48%;
+        }
+
+        .attribute-list, .results {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        select, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .created-by {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 1000; /* Ensure it's on top */
+        }
+    </style>
+</head>
+<body>
 </head>
 <body>
 
@@ -58,9 +103,9 @@
 
                 <div class="results">
                     <p><strong>Results:</strong></p>
-                    <p>Legendary Itemlevel: <input type="text" id="result1" readonly></p>
-                    <p>Accesories Max Itemlevel(+5): <input type="text" id="result2" readonly></p>
-                    <p>Weapons and Armours Max Itemlevel(+10): <input type="text" id="result3" readonly></p>
+                    <p>Legendary Itemlevel: <input type="text" id="result1" readonly=""></p>
+                    <p>Accesories Max Itemlevel(+5): <input type="text" id="result2" readonly=""></p>
+                    <p>Weapons and Armours Max Itemlevel(+10): <input type="text" id="result3" readonly=""></p>
                 </div>
             </form>
         </div>
@@ -70,7 +115,7 @@
 
                 <label for="typeSelect">Item Type:</label>
                 <select id="typeSelect">
-                    <option value="" selected>Select item type</option>
+                    <option value="" selected="">Select item type</option>
                     <option value="meleeWeapons">Melee Weapons</option>
                     <option value="distanceWeapons">Distance Weapons</option>
                     <option value="wands">Wands</option>
@@ -91,6 +136,10 @@
 
         </div>
     </div>
+
+    <footer class="created-by">
+        Created by, - Neko and G
+    </footer>
 
     <script>
         function sum1() {
@@ -494,5 +543,6 @@
         }
     </script>
 
-</body>
-</html>
+
+
+</body></html>
