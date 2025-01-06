@@ -1,85 +1,189 @@
 <!DOCTYPE html>
-<!-- saved from url=(0042)https://meownies.github.io/soecalculators/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Souls of Elysium Calculators</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c2c2c; /* Dark grey background */
+            color: #d3d3d3; /* Light grey text for contrast */
         }
 
         h1, h2, h3 {
+            font-family: 'Arial', sans-serif;
             text-align: center;
+            color: #e0e0e0; /* Softer grey for headings */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 10px;
         }
 
         .container {
             display: flex;
             justify-content: space-between;
             padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            gap: 2cm; /* Adding space between both boxes */
         }
 
         .calculator-section {
             width: 48%;
-        }
-
-        .attribute-list, .results {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #f9f9f9;
-        }
-
-        select, input, button {
-            display: block;
-            margin: 10px 0;
-        }
-    </style>
-	    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
+            background-color: #3a3a3a; /* Dark grey for the cards */
+            border-radius: 10px;
             padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Smooth shadow */
         }
 
-        .calculator-section {
-            width: 48%;
-        }
-
+        /* Results Section */
         .attribute-list, .results {
-            border: 1px solid #ccc;
-            padding: 10px;
+            border: 1px solid #555; /* Border matching the theme */
+            max-width: 475px;  /* Maximum width for input */
+            padding: 15px;
+            background-color: #444; /* Medium grey for results */
             margin-top: 20px;
-            background-color: #f9f9f9;
+            border-radius: 5px;
         }
 
-        select, input, button {
-            display: block;
+        select {
+            width: 95%;
+            max-width: 600px;  /* Maximum width for select */
+            padding: 10px;
             margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #555;
+            font-size: 1rem;
+            background-color: #555;
+            color: #f4f4f4;
         }
 
-        .created-by {
+        input {
+            width: 95%;
+            max-width: 475px;  /* Maximum width for input */
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #555;
+            font-size: 1rem;
+            background-color: #555;
+            color: #f4f4f4;
+        }
+
+        button {
+            width: 95%;
+            max-width: 500px;  /* Maximum width for button */
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #555;
+            font-size: 1rem;
+            background-color: #555;
+            color: #f4f4f4;
+        }
+
+        button {
+            background-color: #666; /* Medium-dark grey */
+            color: #fff; /* White text */
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #888; /* Lighter grey on hover */
+        }
+
+        footer {
             position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: black;
-            color: white;
-            padding: 10px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #111; /* Very dark grey */
+            color: #f4f4f4; /* Light text */
+            padding: 10px 15px;
             border-radius: 5px;
             font-size: 14px;
-            z-index: 1000; /* Ensure it's on top */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+        }
+
+        footer a {
+            color: #f4f4f4; /* Light text */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tooltip for Info Icon */
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #555;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            width: 220px;
+            background-color: #444;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the icon */
+            left: 50%;
+            margin-left: -110px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1cm;
+            }
+
+            .calculator-section {
+                width: 90%;
+                margin-bottom: 20px;
+            }
         }
     </style>
-</head>
-<body>
 </head>
 <body>
 
@@ -90,11 +194,18 @@
             <h2>Souls of Elysium Item Level Calculator</h2>
             <form>
                 <label for="rarity">Rarity:</label>
-                <select id="rarity">
-                    <option value="common">Common</option>
-                    <option value="rare">Rare</option>
-                    <option value="epic">Epic</option>
-                </select>
+                <div class="info-container">
+                    <select id="rarity">
+                        <option value="common">Common</option>
+                        <option value="rare">Rare</option>
+                        <option value="epic">Epic</option>
+                    </select>
+                    <!-- Info Icon -->
+                    <div class="info-icon">
+                        ?
+                        <div class="tooltip">Item rarity is the rarity the item got when it was dropped.</div>
+                    </div>
+                </div>
 
                 <label for="rarityitemlevel">Current Itemlevel:</label>
                 <input type="text" id="rarityitemlevel">
@@ -103,9 +214,9 @@
 
                 <div class="results">
                     <p><strong>Results:</strong></p>
-                    <p>Legendary Itemlevel: <input type="text" id="result1" readonly=""></p>
-                    <p>Accesories Max Itemlevel(+5): <input type="text" id="result2" readonly=""></p>
-                    <p>Weapons and Armours Max Itemlevel(+10): <input type="text" id="result3" readonly=""></p>
+                    <p>Legendary Itemlevel: <input type="text" id="result1" readonly></p>
+                    <p>Accesories Max Itemlevel (+5): <input type="text" id="result2" readonly></p>
+                    <p>Weapons and Armours Max Itemlevel (+10): <input type="text" id="result3" readonly></p>
                 </div>
             </form>
         </div>
@@ -113,33 +224,33 @@
         <div class="calculator-section">
             <h2>Souls of Elysium Attribute Calculator</h2>
 
-                <label for="typeSelect">Item Type:</label>
-                <select id="typeSelect">
-                    <option value="" selected="">Select item type</option>
-                    <option value="meleeWeapons">Melee Weapons</option>
-                    <option value="distanceWeapons">Distance Weapons</option>
-                    <option value="wands">Wands</option>
-                    <option value="armours">Helmet, Armour, Pants</option>
-                    <option value="boots">Boots</option>
-                    <option value="shields">Shield</option>
-                    <option value="accessories">Ring, Necklace</option>
-                </select>
+            <label for="typeSelect">Item Type:</label>
+            <select id="typeSelect">
+                <option value="" selected>Select item type</option>
+                <option value="meleeWeapons">Melee Weapons</option>
+                <option value="distanceWeapons">Distance Weapons</option>
+                <option value="wands">Wands and Rods</option>
+                <option value="armours">Helmets, Armours or Pants</option>
+                <option value="boots">Boots</option>
+                <option value="shields">Shields</option>
+                <option value="accessories">Ring, Necklace</option>
+            </select>
 
-                <label for="itemlevel">Itemlevel:</label>
-                <input type="text" id="itemlevel">
+            <label for="itemlevel">Itemlevel:</label>
+            <input type="text" id="itemlevel">
 
-                <button type="button" onclick="changeType()">Calculate Attributes</button>
+            <button type="button" onclick="changeType()">Calculate Attributes</button>
 
-                <div class="attribute-list">
-                    <p><strong>Attribute Outcomes:</strong></p>
-                </div>
-
+            <div class="attribute-list">
+                <p><strong>Attribute Outcomes:</strong></p>
+            </div>
         </div>
     </div>
 
-    <footer class="created-by">
-        Created by, - Neko and G
+    <footer>
+        Created by, - Neko and Datedd
     </footer>
+
 
     <script>
         function sum1() {
@@ -174,7 +285,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -221,7 +332,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -275,7 +386,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -315,7 +426,7 @@
 					"value": 0.058,
 					"unit": "%",
 				},
-				"Spellcost Reduction %": {
+				"Spellcost Reduction": {
 					"value":0.034,
 					"unit": "%",
 				},
@@ -337,7 +448,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -383,7 +494,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -433,7 +544,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -473,7 +584,7 @@
 					"value": 0.03,
 					"unit": "%",
 				},
-				"Increased Incomming Healing ": {
+				"Increased Healing ": {
 					"value": 0.028,
 					"unit": "%",
 				},
@@ -487,7 +598,7 @@
 					"value": 0.0205,
 					"unit": "%",
 				},
-				"Experience ": {
+				"Experience 30% chance to gain ": {
 					"value": 0.01,
 					"unit": "%",
 				},
@@ -495,7 +606,7 @@
 					"value": 0.03,
 					"unit": "%",
 				},
-				"Increased Incomming Healing ": {
+				"Increased Healing ": {
 					"value": 0.028,
 					"unit": "%",
 				},
@@ -543,6 +654,5 @@
         }
     </script>
 
-
-
-</body></html>
+</body>
+</html>
